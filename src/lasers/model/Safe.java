@@ -39,7 +39,52 @@ public class Safe {
         }
     }
 
-    public void safeRemove(){
+    public void safeRemove(int row, int column){
+        String laserLetter = ".";
+        this.safeArray[row][column] =laserLetter;
+
+        while (row >= 1) {
+            String laserPointer = ".";
+            row-=1;
+            this.safeArray[row][column] = laserPointer;
+            if (this.safeArray[row][column].equals("L")){
+                break;
+            }
+        }
+        while (row <= safeArray[0].length) {
+            String laserPointer = ".";
+            row++;
+            this.safeArray[row][column] = laserPointer;
+            if (this.safeArray[row][column].equals("L")){
+                break;
+            }
+        }
+        while (column >= 1) {
+            String laserPointer = ".";
+            column-=1;
+            this.safeArray[row][column] = laserPointer;
+            if (this.safeArray[row][column].equals("L")){
+                break;
+            }
+        }
+        while (column <= safeArray.length) {
+            String laserPointer = ".";
+            column++;
+            this.safeArray[row][column] = laserPointer;
+            if (this.safeArray[row][column].equals("L")){
+                break;
+            }
+            for (int row2 = 0; row2 < safeArray.length; row2++){
+                for (int column2 = 0; column2 < safeArray[row2].length; column2++){
+                    if (safeArray[row2][column2].equals("L")){
+                        this.safeAdd(row2, column2);
+                    }
+                }
+
+
+            }
+        }
+
 
     }
 
