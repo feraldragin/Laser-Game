@@ -8,13 +8,39 @@ public class Safe {
         this.safeArray = safeArray;
     }
 
-    public String safeAdd(){
+    public void safeAdd(int row, int column) {
         //adds if laserCheck() is true and sends error if false
-        return "add";
+
+        if (laserCheck(row, column)) {
+            String laserLetter = "L";
+            this.safeArray[row][column] =laserLetter;
+
+            while (row >= 1) {
+                String laserPointer = "*";
+                row-=1;
+                this.safeArray[row][column] = laserPointer;
+            }
+            while (row <= safeArray[0].length) {
+                String laserPointer = "*";
+                row++;
+                this.safeArray[row][column] = laserPointer;
+            }
+            while (column >= 1) {
+                String laserPointer = "*";
+                column-=1;
+                this.safeArray[row][column] = laserPointer;
+            }
+            while (column <= safeArray.length) {
+                String laserPointer = "*";
+                column++;
+                this.safeArray[row][column] = laserPointer;
+            }
+
+        }
     }
 
-    public String safeRemove(){
-        return "remove";
+    public void safeRemove(){
+
     }
 
     public void safeDisplay(){
@@ -42,8 +68,21 @@ public class Safe {
         return false;
     }
 
-    public boolean laserCheck(){
+    public boolean laserCheck(int row, int column){
         //if pillars are good and laser, number, letter, and/or * not in place
-        return false;
+        if (safeArray[row][column].equals("L")){
+            return false;
+        }
+
+        else if (safeArray[row][column].equals("X")){
+            return false;
+        }
+
+        else if (Character.isDigit(safeArray[row][column].charAt(0))){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }
