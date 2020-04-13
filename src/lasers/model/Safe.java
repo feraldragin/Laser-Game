@@ -14,26 +14,49 @@ public class Safe {
         if (laserCheck(row, column)) {
             String laserLetter = "L";
             this.safeArray[row][column] =laserLetter;
-
-            while (row >= 1) {
-                String laserPointer = "*";
-                row-=1;
-                this.safeArray[row][column] = laserPointer;
+            int row1 = row;
+            int row2 = row;
+            int column1 = column;
+            int column2 = column;
+            while (row1 >= 1) {
+                row1 -= 1;
+                if (laserCheck(row1, column)) {
+                    String laserPointer = "*";
+                    this.safeArray[row1][column] = laserPointer;
+                }
+                else {
+                    break;
+                }
             }
-            while (row <= safeArray[0].length) {
-                String laserPointer = "*";
-                row++;
-                this.safeArray[row][column] = laserPointer;
+            while (row2 < safeArray[0].length - 1) {
+                row2++;
+                if (laserCheck(row2, column)) {
+                    String laserPointer = "*";
+                    this.safeArray[row2][column] = laserPointer;
+                }
+                else{
+                    break;
+                }
             }
-            while (column >= 1) {
-                String laserPointer = "*";
-                column-=1;
-                this.safeArray[row][column] = laserPointer;
+            while (column1 >= 1) {
+                column1 -= 1;
+                if (laserCheck(row, column1)) {
+                    String laserPointer = "*";
+                    this.safeArray[row][column1] = laserPointer;
+                }
+                else{
+                    break;
+                }
             }
-            while (column <= safeArray.length) {
-                String laserPointer = "*";
-                column++;
-                this.safeArray[row][column] = laserPointer;
+            while (column2 < safeArray.length - 1) {
+                column2++;
+                if (laserCheck(row, column2)) {
+                    String laserPointer = "*";
+                    this.safeArray[row][column2] = laserPointer;
+                }
+                else{
+                    break;
+                }
             }
 
         }

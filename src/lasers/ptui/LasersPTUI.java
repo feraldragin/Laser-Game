@@ -4,6 +4,7 @@ import lasers.model.Safe;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 
 public class LasersPTUI {
@@ -39,6 +40,25 @@ public class LasersPTUI {
                 }
                 Safe safe = new Safe(safeArray);
                 safe.safeDisplay();
+                Scanner userInput = new Scanner(System.in);
+                String inputLine = userInput.nextLine();
+                String[] inputSplit = inputLine.split(" ");
+                while (inputSplit[0].charAt(0) != 'q'){
+                    if (inputSplit[0].charAt(0) == 'a'){
+                        safe.safeAdd(Integer.parseInt(inputSplit[1]), Integer.parseInt(inputSplit[2]));
+                    }
+                    else if (inputSplit[0].charAt(0) == 'r'){
+                        safe.safeRemove(Integer.parseInt(inputSplit[1]), Integer.parseInt(inputSplit[2]));
+                    }
+                    else if (inputSplit[0].charAt(0) == 'v'){
+                        safe.safeVerify();
+                    }
+                    else if (inputSplit[0].charAt(0) == 'd'){
+                        safe.safeDisplay();
+                    }
+                    inputLine = userInput.nextLine();
+                    inputSplit = inputLine.split(" ");
+                }
 
             }
         }
