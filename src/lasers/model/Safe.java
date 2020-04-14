@@ -132,8 +132,83 @@ public class Safe {
         }
     }
 
-    public boolean safeVerify(){
-        return false;
+    public void safeVerify(){
+        forBreak:
+        for (int row = 0; row < safeArray.length; row++) {
+            for (int column = 0; column < safeArray[row].length; column++) {
+                if (safeArray[row][column].equals(".")){
+                    System.out.println("Error at " + row + " "+ column);
+                    break forBreak;
+                }
+                else if (safeArray[row][column].equals("L")){
+                    int row1 = row;
+                    int row2 = row;
+                    int column1 = column;
+                    int column2 = column;
+                    while (row1 >= 1) {
+                        row1 -= 1;
+                        if (Character.isDigit(safeArray[row1][column].charAt(0))){
+                            break;
+                        }
+                        else if (safeArray[row1][column].equals("L")) {
+                            System.out.println("Error at index " + row + " " + column);
+                            break forBreak;
+                        }
+                    }
+                    while (row2 < safeArray[0].length - 1) {
+                        row2++;
+                        if (Character.isDigit(safeArray[row2][column].charAt(0))){
+                            break;
+                        }
+                        else if (safeArray[row2][column].equals("L")) {
+                            System.out.println("Error at index " + row + " " + column);
+                            break forBreak;
+                        }
+                    }
+                    while (column1 >= 1) {
+                        column1 -= 1;
+                        if (Character.isDigit(safeArray[row][column1].charAt(0))){
+                            break;
+                        }
+                        else if (safeArray[row][column1].equals("L")) {
+                            System.out.println("Error at index" + row + " " + column);
+                            break forBreak;
+                        }
+                    }
+                    while (column2 < safeArray.length - 1) {
+                        column2++;
+                        if (Character.isDigit(safeArray[row][column2].charAt(0))){
+                            break;
+                        }
+                        else if (safeArray[row][column2].equals("L")) {
+                            System.out.println("Error at index" + row + " " + column);
+                            break forBreak;
+                        }
+                    }
+                }
+                else if(Character.isDigit(safeArray[row][column].charAt(0))){
+                    int laserCount = 0;
+                    if (row + 1 < safeArray.length-1 && row - 1 > 0 && column + 1 < safeArray[0].length-1 && column - 1 >0) {
+                        if (safeArray[row + 1][column].equals("L")) {
+                            laserCount++;
+                        }
+                        else if (safeArray[row-1][column].equals("L")){
+                            laserCount++;
+                        }
+                        else if (safeArray[row][column-1].equals("L")){
+                            laserCount++;
+                        }
+                        else if (safeArray[row][column+1].equals("L")){
+                            laserCount++;
+                        }
+                    }
+                    if (laserCount != Integer.parseInt(safeArray[row][column])){
+                        System.out.println("Error at " + row + " " + column);
+                        break forBreak;
+                    }
+                }
+            }
+        }
     }
 
     public boolean laserCheck(int row, int column){
