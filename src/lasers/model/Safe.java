@@ -59,7 +59,6 @@ public class Safe {
                 }
 
             }
-            System.out.println("Laser added at: (" + row + ", " + column + ")");
 
         }
     }
@@ -125,7 +124,6 @@ public class Safe {
                     }
                 }
             }
-            System.out.println("Removed laser at: (" + row + ", " + column +")");
         }
 
     }
