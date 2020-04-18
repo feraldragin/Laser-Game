@@ -75,8 +75,12 @@ public class LasersPTUI {
             }
             //checks if the user put display
             else if (inputSplit[0].charAt(0) == 'd') {
+                //prints the safe
                 safe.safeDisplay();
-            } else if (inputSplit[0].charAt(0) == 'h') {
+            }
+            //checks if the user put help
+            else if (inputSplit[0].charAt(0) == 'h') {
+                //prints the help message
                 System.out.println("a|add r c: Add laser to (r,c) \nd|display: Display safe \nh|help: Print this help message \nq|quit: Exit program \nr|remove r c: Remove laser from (r,c) \nv|verify: Verify safe correctness");
             } else {
                 System.out.println("Invalid input: " + inputLine);
@@ -94,19 +98,21 @@ public class LasersPTUI {
     public static void main(String[] args) {
         // check sanity of input
         try {
-
-
             if (args.length < 1 || args.length > 2) {
                 System.out.println("Usage: java LasersPTUI safe-file [input]");
             } else {
+                //runs if there is only the file to create the safe
                 if (args.length == 1) {
                     File file = new File(args[0]);
                     String[][] safeArray = readNormalFile(file);
                     //creates a new safe with the array
                     Safe safe = new Safe(safeArray);
+                    //displays safe
                     safe.safeDisplay();
+                    //runs user input
                     UserInput(safe);
                 }
+                //runs if there is a file with input
                 else {
                     File file = new File(args[0]);
                     String[][] safeArray = readNormalFile(file);
@@ -118,17 +124,21 @@ public class LasersPTUI {
                         //splits the file
                         String[] com = first.split(" ");
                         safe.safeDisplay();
+                        //reads and prints out what the input file says
                         System.out.print("> ");
                             if (com[0].charAt(0) == 'a') {
                                 if (com.length != 3){
                                     System.out.println("Incorrect coordinates");
                                 }
+                                //adds a laser
                                 else {
                                     System.out.println("add " + com[1] + " " + com[2]);
                                     safe.safeAdd(Integer.parseInt(com[1]), Integer.parseInt(com[2]));
                                     System.out.println("Laser added at: (" + com[1] + ", " + com[2] + ")");
                                 }
-                            } else if (com[0].charAt(0) == 'r') {
+                            }
+                            //removes a laser
+                            else if (com[0].charAt(0) == 'r') {
                                 if (com.length != 3){
                                     System.out.println("Incorrect coordinates");
                                 }
@@ -137,19 +147,26 @@ public class LasersPTUI {
                                     safe.safeRemove(Integer.parseInt(com[1]), Integer.parseInt(com[2]));
                                     System.out.println("Laser removed at: (" + com[1] + ", " + com[2] + ")");
                                 }
-                            } else if (com[0].charAt(0) == 'v') {
+                            }
+                            //verifies the safe
+                            else if (com[0].charAt(0) == 'v') {
                                 System.out.println("verify");
                                 safe.safeVerify();
-                            } else if (com[0].charAt(0) == 'd') {
+                            }
+                            //displays the safe
+                            else if (com[0].charAt(0) == 'd') {
                                 System.out.println("display");
                                 safe.safeDisplay();
-                            } else if (com[0].charAt(0) == 'h') {
+                            }
+                            //prints the help statement
+                            else if (com[0].charAt(0) == 'h') {
                                 System.out.println("help");
                                 System.out.println("a|add r c: Add laser to (r,c) \nd|display: Display safe \nh|help: Print this help message \nq|quit: Exit program \nr|remove r c: Remove laser from (r,c) \nv|verify: Verify safe correctness");
                             } else {
                                 System.out.println("Invalid input: " + first);
                             }
                     }
+                    //runs the user input
                     UserInput(safe);
                 }
             }
